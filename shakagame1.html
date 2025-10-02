@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaka's Hub - PC Games & News</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f1923;
+            --secondary: #1a2a3a;
+            --accent: #00c3ff;
+            --accent-hover: #00a8e8;
+            --text: #e6f0ff;
+            --text-secondary: #a0b0c0;
+            --card-bg: rgba(25, 40, 60, 0.7);
+            --card-hover: rgba(30, 50, 80, 0.9);
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --purple: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), #0a121c);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 40px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 195, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        header {
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            font-size: 2.4rem;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.5);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a i {
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4.5rem 2rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(to right, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .genre-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            background: var(--secondary);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: rgba(0, 195, 255, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 195, 255, 0.2);
+        }
+
+        .games-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .genre-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .genre-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin: 2.5rem 0 1.5rem;
+            text-align: center;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 3px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-hover);
+            box-shadow: 0 15px 40px rgba(0, 195, 255, 0.25);
+            border-color: rgba(0, 195, 255, 0.3);
+        }
+
+        .game-logo {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(10, 20, 30, 0.7);
+        }
+
+        .game-logo img {
+            max-width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .game-card:hover .game-logo img {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .game-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .requirements {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .req-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .req-label {
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-size: 0.8rem;
+        }
+
+        .req-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .download-btn {
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(90deg, var(--accent-hover), #7e57c2);
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0, 195, 255, 0.5);
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .news-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .news-card:hover .news-img img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .news-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Help Center */
+        .help-center {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .help-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .help-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .help-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .help-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-icon {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: var(--secondary);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-logo {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-logo img {
+            max-height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .modal-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-description {
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .specs {
+            background: rgba(25, 40, 60, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .specs h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .spec-item {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+
+        .spec-label {
+            min-width: 120px;
+            color: var(--text-secondary);
+        }
+
+        .spec-value {
+            font-weight: 500;
+        }
+
+        .modal-download {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .modal-download:hover {
+            background: linear-gradient(90deg, var(--accent-hover), #7e57c2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 195, 255, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            
+            nav ul {
+                gap: 1.2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                padding: 3rem 1.5rem 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .tab-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .requirements {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo" id="logo">
+                <i class="fas fa-crown logo-icon"></i>
+                <div class="logo-text">SHAKA'S HUB</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#action"><i class="fas fa-bolt"></i> Action</a></li>
+                    <li><a href="#rpg"><i class="fas fa-dragon"></i> RPG</a></li>
+                    <li><a href="#simulation"><i class="fas fa-microchip"></i> Simulation</a></li>
+                    <li><a href="#open-world"><i class="fas fa-globe"></i> Open World</a></li>
+                    <li><a href="#strategy"><i class="fas fa-chess"></i> Strategy</a></li>
+                    <li><a href="#news"><i class="fas fa-newspaper"></i> News</a></li>
+                    <li><a href="#help"><i class="fas fa-headset"></i> Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Discover the Ultimate PC Gaming Experience</h1>
+        <p>Explore top-rated games across all genres, stay updated with the latest news, and get support when you need it.</p>
+        
+        <div class="genre-tabs">
+            <button class="tab-btn active" data-genre="action">
+                <i class="fas fa-bolt"></i> Action
+            </button>
+            <button class="tab-btn" data-genre="rpg">
+                <i class="fas fa-dragon"></i> RPG
+            </button>
+            <button class="tab-btn" data-genre="simulation">
+                <i class="fas fa-microchip"></i> Simulation
+            </button>
+            <button class="tab-btn" data-genre="open-world">
+                <i class="fas fa-globe"></i> Open World
+            </button>
+            <button class="tab-btn" data-genre="strategy">
+                <i class="fas fa-chess"></i> Strategy
+            </button>
+        </div>
+    </section>
+
+    <div class="games-container">
+        <!-- Action Games -->
+        <section id="action" class="genre-section active">
+            <h2 class="section-title">Top Action Games</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card" data-game="cyberpunk">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_logo.png" alt="Cyberpunk 2077">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Cyberpunk 2077</h3>
+                        <p class="game-description">An open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour and body modification.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 1060</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="game-card" data-game="doom">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/2c/DOOMEternal_cover_art.jpg" alt="DOOM Eternal">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">DOOM Eternal</h3>
+                        <p class="game-description">The Doom Slayer returns in this epic sequel to DOOM (2016) with more demons, more customization, and more fast-paced combat.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 1050</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/782330/DOOM_Eternal/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 3 -->
+                <div class="game-card" data-game="elden">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Elden_Ring_cover_art.jpg/220px-Elden_Ring_cover_art.jpg" alt="Elden Ring">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Elden Ring</h3>
+                        <p class="game-description">A fantasy action-RPG adventure set within a world created by Hidetaka Miyazaki and George R. R. Martin.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">12 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 1060</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 4 -->
+                <div class="game-card" data-game="god-of-war">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/0/09/God_of_War_2018_cover_artwork.jpg" alt="God of War">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">God of War</h3>
+                        <p class="game-description">Journey as Kratos, a father and mentor to his young son Atreus, in a desperate attempt to save his son from a devastating threat.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 960</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1593500/God_of_War/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 5 -->
+                <div class="game-card" data-game="horizon">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1e/Horizon_Forbidden_West_cover_art.jpg" alt="Horizon Forbidden West">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Horizon Forbidden West</h3>
+                        <p class="game-description">Join Aloy as she braves the Forbidden West - a majestic but dangerous frontier that conceals mysterious new threats.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">16 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 1060</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1151640/Horizon_Forbidden_West_Complete_Edition/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RPG Games -->
+        <section id="rpg" class="genre-section">
+            <h2 class="section-title">Top RPG Games</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card" data-game="skyrim">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/15/The_Elder_Scrolls_V_Skyrim_cover.png" alt="The Elder Scrolls V: Skyrim">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">The Elder Scrolls V: Skyrim</h3>
+                        <p class="game-description">An open-world fantasy RPG where you can explore the vast land of Skyrim, complete quests, and develop your character.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">4 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 460</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim_Special_Edition/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="game-card" data-game="witcher3">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/2c/Witcher_3_cover_art.jpg" alt="The Witcher 3: Wild Hunt">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">The Witcher 3: Wild Hunt</h3>
+                        <p class="game-description">Play as Geralt of Rivia, a monster hunter in a vast open world full of choices and consequences.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">6 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 660</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 3 -->
+                <div class="game-card" data-game="fallout4">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Fallout_4_cover_art.jpg" alt="Fallout 4">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Fallout 4</h3>
+                        <p class="game-description">A post-apocalyptic RPG set in the ruins of Boston where you build settlements and survive in a radioactive wasteland.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 550</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/377160/Fallout_4/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 4 -->
+                <div class="game-card" data-game="mass-effect">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Mass_Effect_Legendary_Edition_cover_art.jpg" alt="Mass Effect Legendary Edition">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Mass Effect Legendary Edition</h3>
+                        <p class="game-description">The definitive Mass Effect experience includes single-player base content and over 40 DLC from the highly acclaimed trilogy.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 970</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 5 -->
+                <div class="game-card" data-game="dragon-age">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/5d/Dragon_Age_Inquisition_cover.jpg" alt="Dragon Age: Inquisition">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Dragon Age: Inquisition</h3>
+                        <p class="game-description">When the sky opens up and rains down chaos, the world needs heroes. Become the Inquisitor and lead the fight against the demons.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 660</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/282140/Dragon_Age_Inquisition/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulation Games -->
+        <section id="simulation" class="genre-section">
+            <h2 class="section-title">Top Simulation Games</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card" data-game="flight">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/Microsoft_Flight_Simulator_2020_cover_art.jpg" alt="Microsoft Flight Simulator">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Microsoft Flight Simulator</h3>
+                        <p class="game-description">Experience the world with unprecedented realism in this next-generation flight simulator powered by Azure AI.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 770</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1250410/Microsoft_Flight_Simulator/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="game-card" data-game="cities">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/Cities_Skylines_cover_art.jpg" alt="Cities: Skylines">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Cities: Skylines</h3>
+                        <p class="game-description">A modern take on the classic city simulation where you build and manage your own city with realistic urban planning.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">6 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 660</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/255710/Cities_Skylines/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 3 -->
+                <div class="game-card" data-game="farming">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/5d/Farming_Simulator_22_cover_art.jpg" alt="Farming Simulator 22">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Farming Simulator 22</h3>
+                        <p class="game-description">Take on the role of a modern farmer with over 400 authentic machines and tools from leading brands.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 660</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1355480/Farming_Simulator_22/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 4 -->
+                <div class="game-card" data-game="simcity">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/5d/SimCity_2013_cover.jpg" alt="SimCity">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">SimCity</h3>
+                        <p class="game-description">Build the city of your dreams in this modern take on the classic city-building simulation.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">4 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 260</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/211340/SimCity/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 5 -->
+                <div class="game-card" data-game="planet-zoo">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Planet_Zoo_cover_art.jpg" alt="Planet Zoo">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Planet Zoo</h3>
+                        <p class="game-description">Build a world for wildlife in Planet Zoo. From humble beginnings to creating the world's most remarkable zoos.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 770</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/723770/Planet_Zoo/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open World Games -->
+        <section id="open-world" class="genre-section">
+            <h2 class="section-title">Top Open World Games</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card" data-game="gta5">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="Grand Theft Auto V">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Grand Theft Auto V</h3>
+                        <p class="game-description">Experience the criminal underworld of Los Santos in this critically acclaimed open-world action-adventure game.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 8</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 660</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="game-card" data-game="reddead">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg" alt="Red Dead Redemption 2">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Red Dead Redemption 2</h3>
+                        <p class="game-description">An epic tale of life in America's unforgiving heartland, featuring a vast and atmospheric world.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">12 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 1060</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 3 -->
+                <div class="game-card" data-game="assassins">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/Assassin%27s_Creed_Valhalla_cover_art.jpg" alt="Assassin's Creed Valhalla">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Assassin's Creed Valhalla</h3>
+                        <p class="game-description">Become a legendary Viking warrior raised on tales of battle and glory in this open-world action RPG.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 960</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1192660/Assassins_Creed_Valhalla/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 4 -->
+                <div class="game-card" data-game="watch-dogs">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/31/Watch_Dogs_Legion_cover_art.jpg" alt="Watch Dogs: Legion">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Watch Dogs: Legion</h3>
+                        <p class="game-description">Build a resistance from virtually anyone you see as you hack, infiltrate, and fight to take back a near-future London.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 960</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1030730/Watch_Dogs_Legion/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 5 -->
+                <div class="game-card" data-game="far-cry">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Far_Cry_6_cover_art.jpg" alt="Far Cry 6">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Far Cry 6</h3>
+                        <p class="game-description">Welcome to Yara, a tropical paradise frozen in time. As the dictator of Yara, Anton Castillo intends to restore his nation back to its former glory.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 960</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1133720/Far_Cry_6/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Games -->
+        <section id="strategy" class="genre-section">
+            <h2 class="section-title">Top Strategy Games</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card" data-game="civilization">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/5d/Civilization_VI_cover_art.jpg" alt="Civilization VI">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Civilization VI</h3>
+                        <p class="game-description">Build an empire to stand the test of time in this award-winning turn-based strategy game.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">4 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 460</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="game-card" data-game="stellaris">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/Stellaris_cover_art.jpg" alt="Stellaris">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Stellaris</h3>
+                        <p class="game-description">Explore a vast galaxy full of wonder in this grand strategy game of space exploration, empire management, and diplomacy.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">4 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 560</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/281990/Stellaris/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 3 -->
+                <div class="game-card" data-game="crusader">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/4f/Crusader_Kings_III_cover_art.jpg" alt="Crusader Kings III">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Crusader Kings III</h3>
+                        <p class="game-description">Medieval grand strategy role-playing game where you control a royal dynasty through the centuries.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">6 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 460</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1158310/Crusader_Kings_III/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 4 -->
+                <div class="game-card" data-game="total-war">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/71/Total_War_Warhammer_III_cover_art.jpg" alt="Total War: Warhammer III">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Total War: Warhammer III</h3>
+                        <p class="game-description">Experience the cataclysmic finale to the Total War: WARHAMMER trilogy. Command your forces in epic battles and shape your empire.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 10</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">8 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 970</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/1144200/Total_War_WARHAMMER_III/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Game 5 -->
+                <div class="game-card" data-game="xcom">
+                    <div class="game-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/XCOM_2_cover_art.jpg" alt="XCOM 2">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">XCOM 2</h3>
+                        <p class="game-description">Twenty years have passed since the events of XCOM: Enemy Unknown. The aliens have established a new world order.</p>
+                        <div class="requirements">
+                            <div class="req-item">
+                                <span class="req-label">OS</span>
+                                <span class="req-value">Win 7</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">RAM</span>
+                                <span class="req-value">6 GB</span>
+                            </div>
+                            <div class="req-item">
+                                <span class="req-label">GPU</span>
+                                <span class="req-value">GTX 460</span>
+                            </div>
+                        </div>
+                        <a href="https://store.steampowered.com/app/268500/XCOM_2/" class="download-btn" target="_blank">
+                            <i class="fab fa-steam"></i> Install on Steam
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- News Section -->
+    <section id="news" class="news-section">
+        <h2 class="section-title">Gaming News & Updates</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-img">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Gaming News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date">June 15, 2023</div>
+                    <h3 class="news-title">Next-Gen Console Updates Coming to PC</h3>
+                    <p class="news-excerpt">Major game developers announce enhanced PC versions of popular console exclusives with improved graphics and performance.</p>
+                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <div class="news-img">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Gaming News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date">June 10, 2023</div>
+                    <h3 class="news-title">VR Gaming Market Expected to Triple by 2025</h3>
+                    <p class="news-excerpt">Industry analysts predict massive growth in virtual reality gaming with new affordable headsets and compelling content.</p>
+                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <div class="news-img">
+                    <img src="https://images.unsplash.com/photo-1551817958-d9d8e35b5380?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Gaming News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date">June 5, 2023</div>
+                    <h3 class="news-title">Cloud Gaming Services Expand Globally</h3>
+                    <p class="news-excerpt">Leading cloud gaming platforms announce expansion to 20 new countries, bringing high-quality gaming to more players worldwide.</p>
+                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Center -->
+    <section id="help" class="help-center">
+        <div class="help-card">
+            <div class="help-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h2 class="help-title">Need Help?</h2>
+            <p class="help-text">If you're experiencing any issues with our website, game information, or have questions about PC gaming, please don't hesitate to contact us.</p>
+            <p class="help-text">Write to us with a detailed description of your problem, and we'll get back to you as soon as possible.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span>kaushalupadhyay8090@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <span>+91 63929 71895</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Detail Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <img id="modalLogo" src="" alt="">
+                </div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-description" id="modalDescription"></div>
+                <div class="specs">
+                    <h3>System Requirements</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Operating System:</span>
+                        <span class="spec-value" id="modalOS"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Processor:</span>
+                        <span class="spec-value" id="modalCPU"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Memory:</span>
+                        <span class="spec-value" id="modalRAM"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Graphics:</span>
+                        <span class="spec-value" id="modalGPU"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Storage:</span>
+                        <span class="spec-value" id="modalStorage"></span>
+                    </div>
+                </div>
+            </div>
+            <a id="modalDownload" class="modal-download" target="_blank">
+                <i class="fab fa-steam"></i> Install on Steam
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Shaka's Hub &copy; 2023 | All game logos and trademarks are property of their respective owners</p>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">About</a>
+        </div>
+        <p>This is a demo website for educational purposes only</p>
+    </footer>
+
+    <script>
+        // Game data for modal
+        const gameData = {
+            cyberpunk: {
+                title: "Cyberpunk 2077",
+                description: "Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i7-6700 or AMD Ryzen 5 1600",
+                ram: "12 GB",
+                gpu: "NVIDIA GeForce GTX 1060 6GB or AMD Radeon RX 580 8GB",
+                storage: "70 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1091500/Cyberpunk_2077/"
+            },
+            doom: {
+                title: "DOOM Eternal",
+                description: "Hell's armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i5 @ 3.3 GHz or AMD Ryzen 3 @ 3.1 GHz",
+                ram: "8 GB",
+                gpu: "NVIDIA GeForce GTX 1050Ti (4GB) or AMD Radeon RX 570 (4GB)",
+                storage: "50 GB available space",
+                steamUrl: "https://store.steampowered.com/app/782330/DOOM_Eternal/"
+            },
+            elden: {
+                title: "Elden Ring",
+                description: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
+                os: "Windows 10",
+                cpu: "Intel Core i5-8400 or AMD Ryzen 3 3300X",
+                ram: "12 GB",
+                gpu: "NVIDIA GeForce GTX 1060 3GB or AMD Radeon RX 580 4GB",
+                storage: "60 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1245620/ELDEN_RING/"
+            },
+            'god-of-war': {
+                title: "God of War",
+                description: "Journey as Kratos, a father and mentor to his young son Atreus, in a desperate attempt to save his son from a devastating threat. Together, they'll travel through Norse realms to stop Ragnarök.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel i5-2500K / AMD Ryzen 3 1200",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 960 (4 GB) / AMD R9 290X (4 GB)",
+                storage: "70 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1593500/God_of_War/"
+            },
+            horizon: {
+                title: "Horizon Forbidden West",
+                description: "Join Aloy as she braves the Forbidden West - a majestic but dangerous frontier that conceals mysterious new threats. Explore distant lands, fight bigger and more awe-inspiring machines, and encounter astonishing new tribes.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i7-8700K / AMD Ryzen 5 3600",
+                ram: "16 GB",
+                gpu: "NVIDIA GeForce RTX 2070 / AMD Radeon RX 6800",
+                storage: "100 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1151640/Horizon_Forbidden_West_Complete_Edition/"
+            },
+            skyrim: {
+                title: "The Elder Scrolls V: Skyrim",
+                description: "EPIC FANTASY REBORN. The next chapter in the highly anticipated Elder Scrolls saga arrives from the makers of the 2006 and 2008 Games of the Year, Bethesda Game Studios.",
+                os: "Windows 7/8.1/10 (64-bit)",
+                cpu: "Intel i5-2400/AMD FX-8320 or equivalent",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 780 3GB / AMD R9 290 4GB",
+                storage: "12 GB available space",
+                steamUrl: "https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim_Special_Edition/"
+            },
+            witcher3: {
+                title: "The Witcher 3: Wild Hunt",
+                description: "As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world.",
+                os: "64-bit Windows 7, 64-bit Windows 8 (8.1) or 64-bit Windows 10",
+                cpu: "Intel CPU Core i5-2500K 3.3GHz / AMD CPU Phenom II X4 940",
+                ram: "6 GB",
+                gpu: "Nvidia GPU GeForce GTX 660 / AMD GPU Radeon HD 7870",
+                storage: "35 GB available space",
+                steamUrl: "https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/"
+            },
+            fallout4: {
+                title: "Fallout 4",
+                description: "As the sole survivor of Vault 111, you enter a world destroyed by nuclear war. Every second is a fight for survival, and every choice is yours. Only you can rebuild and determine the fate of the Wasteland.",
+                os: "Windows 7/8/10 (64-bit OS required)",
+                cpu: "Intel Core i5-2300 2.8 GHz/AMD Phenom II X4 945 3.0 GHz or equivalent",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 550 Ti 2GB/AMD Radeon HD 7870 2GB or equivalent",
+                storage: "30 GB available space",
+                steamUrl: "https://store.steampowered.com/app/377160/Fallout_4/"
+            },
+            'mass-effect': {
+                title: "Mass Effect Legendary Edition",
+                description: "The definitive Mass Effect experience includes single-player base content and over 40 DLC from the highly acclaimed trilogy, all remastered and optimized for 4K Ultra HD.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i5 3570 or AMD FX-8350",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 970 / AMD RX 580",
+                storage: "120 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/"
+            },
+            'dragon-age': {
+                title: "Dragon Age: Inquisition",
+                description: "When the sky opens up and rains down chaos, the world needs heroes. Become the Inquisitor and lead the fight against the demons. Gather your forces and take back the world.",
+                os: "Windows 7 64-bit",
+                cpu: "Intel Core i5-2500K / AMD FX-8350",
+                ram: "8 GB",
+                gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7870",
+                storage: "50 GB available space",
+                steamUrl: "https://store.steampowered.com/app/282140/Dragon_Age_Inquisition/"
+            },
+            flight: {
+                title: "Microsoft Flight Simulator",
+                description: "From light planes to wide-body jets, fly highly detailed and accurate aircraft in the next generation of Microsoft Flight Simulator. Test your piloting skills against the challenges of night flying, real-time atmospheric simulation and live weather.",
+                os: "Windows 10",
+                cpu: "Intel i5-4460 | AMD Ryzen 3 1200",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 770 | AMD Radeon RX 570",
+                storage: "150 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1250410/Microsoft_Flight_Simulator/"
+            },
+            cities: {
+                title: "Cities: Skylines",
+                description: "Cities: Skylines is a modern take on the classic city simulation. The game introduces new gameplay elements to realize the thrill and hardships of creating and maintaining a real city.",
+                os: "Windows® 7 (SP1) / Windows® 8 / Windows® 8.1 (64-bit)",
+                cpu: "Intel® Core™ I7 930 | AMD® FX 6350",
+                ram: "6 GB",
+                gpu: "Nvidia® GeForce™ GTS 450 (1 GB) | AMD® R7 250 (2 GB)",
+                storage: "4 GB available space",
+                steamUrl: "https://store.steampowered.com/app/255710/Cities_Skylines/"
+            },
+            farming: {
+                title: "Farming Simulator 22",
+                description: "Take on the role of a modern farmer! Agriculture, animal husbandry and forestry offer a huge variety of farming activities while you face the challenges of the four seasons, especially winter.",
+                os: "Windows 10 Home (64-bit)",
+                cpu: "Intel Core i5-3330 / AMD FX-8320 or better",
+                ram: "8 GB",
+                gpu: "GeForce GTX 660 / AMD Radeon R7 265 or better (min. 2GB VRAM)",
+                storage: "35 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1355480/Farming_Simulator_22/"
+            },
+            simcity: {
+                title: "SimCity",
+                description: "Build the city of your dreams in this modern take on the classic city-building simulation. Create a thriving metropolis with advanced infrastructure and services.",
+                os: "Windows 7 64-bit",
+                cpu: "AMD Athlon 64 X2 6400+ / Intel Core 2 Duo E6700",
+                ram: "4 GB",
+                gpu: "ATI Radeon HD 3870 / NVIDIA GeForce 8800 GT",
+                storage: "12 GB available space",
+                steamUrl: "https://store.steampowered.com/app/211340/SimCity/"
+            },
+            'planet-zoo': {
+                title: "Planet Zoo",
+                description: "Build a world for wildlife in Planet Zoo. From humble beginnings to creating the world's most remarkable zoos, manage your team, care for your animals, and build a conservation legacy.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel i5-2500 / AMD FX-6350",
+                ram: "8 GB",
+                gpu: "NVIDIA GeForce GTX 770 / AMD Radeon R9 270X",
+                storage: "16 GB available space",
+                steamUrl: "https://store.steampowered.com/app/723770/Planet_Zoo/"
+            },
+            gta5: {
+                title: "Grand Theft Auto V",
+                description: "When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.",
+                os: "Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1",
+                cpu: "Intel Core i5 3470 @ 3.2GHz (4 CPUs) / AMD X8 FX-8350 @ 4GHz (8 CPUs)",
+                ram: "8 GB",
+                gpu: "NVIDIA GTX 660 2GB / AMD HD7870 2GB",
+                storage: "72 GB available space",
+                steamUrl: "https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/"
+            },
+            reddead: {
+                title: "Red Dead Redemption 2",
+                description: "America, 1899. The end of the Wild West era has begun. After a robbery goes badly wrong in the western town of Blackwater, Arthur Morgan and the Van der Linde gang are forced to flee. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive.",
+                os: "Windows 10 - April 2018 Update (v1803)",
+                cpu: "Intel® Core™ i7-4770K / AMD Ryzen 5 1500X",
+                ram: "12 GB",
+                gpu: "Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB",
+                storage: "150 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/"
+            },
+            assassins: {
+                title: "Assassin's Creed Valhalla",
+                description: "Become Eivor, a legendary Viking raider on a quest for glory. Explore England's Dark Ages as you raid your enemies, grow your settlement, and build your political power in the quest to earn a place among the gods in Valhalla.",
+                os: "Windows 10 64-bit",
+                cpu: "AMD Ryzen 3 1200 – 3.1 GHz / Intel i5-4460 – 3.2 GHz",
+                ram: "8 GB",
+                gpu: "AMD R9 380 – 4GB / NVIDIA GeForce GTX 960 – 4GB",
+                storage: "50 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1192660/Assassins_Creed_Valhalla/"
+            },
+            'watch-dogs': {
+                title: "Watch Dogs: Legion",
+                description: "Build a resistance from virtually anyone you see as you hack, infiltrate, and fight to take back a near-future London that is facing its downfall. Recruit and play as anyone in the city.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i5-4460 / AMD Ryzen 5 1400",
+                ram: "8 GB",
+                gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R9 380",
+                storage: "45 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1030730/Watch_Dogs_Legion/"
+            },
+            'far-cry': {
+                title: "Far Cry 6",
+                description: "Welcome to Yara, a tropical paradise frozen in time. As the dictator of Yara, Anton Castillo intends to restore his nation back to its former glory by any means, with his son, Diego, following in his bloody footsteps.",
+                os: "Windows 10 64-bit",
+                cpu: "AMD Ryzen 3 1200 / Intel i5-4460",
+                ram: "8 GB",
+                gpu: "AMD RX 460 / NVIDIA GTX 960",
+                storage: "60 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1133720/Far_Cry_6/"
+            },
+            civilization: {
+                title: "Civilization VI",
+                description: "Civilization VI offers new ways to interact with your world, expand your empire across the map, advance your culture, and compete against history's greatest leaders to build a civilization that will stand the test of time.",
+                os: "Windows 7x64 / Windows 8.1x64 / Windows 10x64",
+                cpu: "Intel Core i3 2.5 Ghz or AMD Phenom II 2.6 Ghz or greater",
+                ram: "4 GB",
+                gpu: "1 GB DirectX 11 Video Card (AMD 5570 or nVidia 450 or Intel Integrated Graphics 530)",
+                storage: "12 GB available space",
+                steamUrl: "https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/"
+            },
+            stellaris: {
+                title: "Stellaris",
+                description: "Explore a vast galaxy full of wonder! Paradox Development Studio, makers of the Crusader Kings and Europa Universalis series presents Stellaris, an evolution of the grand strategy genre with space exploration at its core.",
+                os: "Windows® 7 x64 / Windows® 8.1 x64 / Windows® 10 x64",
+                cpu: "Intel® Core™ i3-530 or AMD® FX-6350",
+                ram: "4 GB",
+                gpu: "Nvidia® GeForce™ GTX 560 (1GB) or AMD® ATI Radeon™ HD 5850 (2GB)",
+                storage: "10 GB available space",
+                steamUrl: "https://store.steampowered.com/app/281990/Stellaris/"
+            },
+            crusader: {
+                title: "Crusader Kings III",
+                description: "Paradox Development Studio brings you the sequel to one of the most popular strategy games ever made. Crusader Kings III is the heir to a long legacy of historical grand strategy games.",
+                os: "Windows® 10 Home 64 bit",
+                cpu: "Intel® Core™ i3-2120 / AMD® FX 6350",
+                ram: "6 GB",
+                gpu: "Nvidia® GeForce™ GTX 660 (2GB) or AMD® Radeon™ HD 7870 (2GB)",
+                storage: "8 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1158310/Crusader_Kings_III/"
+            },
+            'total-war': {
+                title: "Total War: Warhammer III",
+                description: "Experience the cataclysmic finale to the Total War: WARHAMMER trilogy. Command your forces in epic battles and shape your empire in a world of chaos, demons, and legendary heroes.",
+                os: "Windows 10 64-bit",
+                cpu: "Intel Core i5-6600 / AMD Ryzen 5 2600X",
+                ram: "8 GB",
+                gpu: "NVIDIA GeForce GTX 970 / AMD Radeon RX 570",
+                storage: "120 GB available space",
+                steamUrl: "https://store.steampowered.com/app/1144200/Total_War_WARHAMMER_III/"
+            },
+            xcom: {
+                title: "XCOM 2",
+                description: "Twenty years have passed since the events of XCOM: Enemy Unknown. The aliens have established a new world order. You are the commander of XCOM, leading a resistance force to liberate Earth.",
+                os: "Windows 7 64-bit",
+                cpu: "Intel Core 2 Duo E4700 / AMD Phenom 9950",
+                ram: "6 GB",
+                gpu: "GeForce GTX 460 / Radeon HD 5870",
+                storage: "45 GB available space",
+                steamUrl: "https://store.steampowered.com/app/268500/XCOM_2/"
+            }
+        };
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const genreSections = document.querySelectorAll('.genre-section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and sections
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                genreSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding section
+                const genre = button.getAttribute('data-genre');
+                document.getElementById(genre).classList.add('active');
+            });
+        });
+
+        // Game card click functionality
+        const gameCards = document.querySelectorAll('.game-card');
+        const modal = document.getElementById('gameModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        gameCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const gameKey = card.getAttribute('data-game');
+                const game = gameData[gameKey];
+                
+                // Populate modal with game data
+                document.getElementById('modalTitle').textContent = game.title;
+                document.getElementById('modalDescription').textContent = game.description;
+                document.getElementById('modalOS').textContent = game.os;
+                document.getElementById('modalCPU').textContent = game.cpu;
+                document.getElementById('modalRAM').textContent = game.ram;
+                document.getElementById('modalGPU').textContent = game.gpu;
+                document.getElementById('modalStorage').textContent = game.storage;
+                document.getElementById('modalDownload').href = game.steamUrl;
+                
+                // Set logo
+                const logoImg = card.querySelector('.game-logo img');
+                document.getElementById('modalLogo').src = logoImg.src;
+                
+                // Show modal
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Logo click for contact info
+        const logo = document.getElementById('logo');
+        logo.addEventListener('click', () => {
+            alert(`Contact Shaka:\n\nEmail: kaushalupadhyay8090@gmail.com\nPhone: +91 63929 71895`);
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active tab if it's a genre
+                    if (targetId !== '#news' && targetId !== '#help') {
+                        const genre = targetId.substring(1);
+                        tabButtons.forEach(btn => {
+                            if (btn.getAttribute('data-genre') === genre) {
+                                btn.click();
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
